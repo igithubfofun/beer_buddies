@@ -4,7 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var passport = require('passport');
+var flash = require('connect-flash');
+var session = require('express-session');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -22,8 +24,32 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var mongoose = require('mongoose');
+mongoose.connect(process.env.DB_CONN_BREWSKIRY);
+
+require('./config/passport')(passport);
+
 app.use('/', routes);
 app.use('/users', users);
+
+// Required for passport
+app.use(session({
+      secret: 'secret',
+      resave: true,
+      saveUninitialized: true
+  }));
+
+// session secret
+app.use(passport.initialize()); //initialize passport
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+
+
+require('./config/passport')(passport); // pass passport for configuration
+
+// routes
+require('./routes/passport.js')(app, passport); // load our routes and pass in our app
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
