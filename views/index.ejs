@@ -1,11 +1,22 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
+<% include ./partials/header %>
+
+
+
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-  </body>
-</html>
+    <div>
+      <ul>
+        <li class="breweries"></li>
+      </ul>
+    </div>
+    <div class="hidden">
+      <p id="gURL"><%= gURL %></p>
+      <p id="gKey"><%= gKey %></p>
+      <p id="bURL"><%= bURL %></p>
+      <p id="bKey"><%= bKey %></p>
+    </div>
+<!-- <div id="map"></div> -->
+
+
+
+<% include ./partials/footer %>

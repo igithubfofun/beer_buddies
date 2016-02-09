@@ -2,10 +2,10 @@ var express = require('express');
 var router = express.Router();
 // Require the User model
 var User = require('../models/user');
-
+var cors = require('cors');
 
 router.post('/', function(req, res, next) {
-
+  res.render('users/index');
 });
 
 router.get('/', function(req, res) {
@@ -38,9 +38,9 @@ router.post('/sign_in', function(req, res){
 
   });
       thisUser.save(function(err) {
-          if (err) console.log(err);
+      if (err) console.log(err);
 
-          res.render('/');
+      res.render('/index');
   });
 });
 
@@ -69,6 +69,7 @@ router.post('/sign_up', function(req, res){
     newUser.save(function(err) {
         if (err) console.log(err);
       });
+    res.render('users')
 })
 
 
