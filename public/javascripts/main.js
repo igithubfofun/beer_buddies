@@ -5,11 +5,13 @@ $(function(){
   var bKey = $('#bKey').text();
 
   var jqXHR = $.ajax({
-         method: "GET",
-         url: bURL +'beer/random',
-         data: {
+          method: "GET",
+          url: bURL +'beer/random',
+          data: {
           key: bKey
-           },
+          },
+          contentType: "application/json",
+          jsonpCallback: 'jsonCallback',
           dataType: "json"
          })
           .done(function() {
@@ -19,10 +21,34 @@ $(function(){
             console.log("Request failed: " + textStatus);
           })
           .always(function() {
-            console.log('Request completed');
+            console.log("Request completed");
         });
 
 
+          var apiRoot = 'breweries/';
+
+          var loadBrewerys = function() {
+
+            //showLoadingIndicator();
+
+            var jqxhr = $.ajax({
+                  url: apiRoot,
+                  method: "GET",
+                  data: {},
+                  dataType: "json"
+              })
+              .done(function(brewerys) {
+                console.log('brewery data', brewerys);
+                displaybrewerys(brewerys);
+              })
+              .fail(function(jqXHR, textStatus) {
+                console.log("Request failed: " + textStatus);
+              })
+              .always(function() {
+                console.log('Request completed');
+                //hideLoadingIndicator();
+              });
+          };
 
 //   function initMap() {
 //       var mapDiv = document.getElementById('map');
