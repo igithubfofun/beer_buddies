@@ -5,8 +5,14 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     <div>
+    <form id="submitBeer">
+        <input type="text" name="beer" id="beer" placeholder="Enter Beer">
+        <input type="submit" value="Find Match">
+    </form>
+    </div>
+    <div>
       <ul>
-        <li class="breweries"></li>
+        <li id="matches"></li>
       </ul>
     </div>
     <div class="hidden">

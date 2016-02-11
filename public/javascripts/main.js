@@ -8,6 +8,11 @@ $(function(){
   var apiRoot = '/users/';
 
 
+$('#submitBeer').on('submit', function() {
+  var beer = $('#beer').val();
+  console.log(beer);
+
+
     var jqxhr = $.ajax({
           url: apiRoot,
           method: "GET",
@@ -15,14 +20,18 @@ $(function(){
           dataType: "json"
       })
       .done(function(users) {
-        // console.log('User data', users);
-        for (var i = 0; i < users.length; i++){
-          for (var j = 1; j < users.length; j++){
-          if (users[i].favoriteBeer === users[j].favoriteBeer){
-            console.log(users[i].name);
-          }
+
+
+
+        var filteredResult = _.where(users, {favoriteBeer: beer});
+        // console.log(filteredResult);
+        var similarNames = _.pluck(filteredResult, 'name');
+        for (var i = 0; i < similarNames.length; i++){
+          console.log(similarNames[i]);
+          $('#matches').append('<li>'+similarNames[i]+'</li>');
         }
-      }
+
+
 
       })
       .fail(function(jqXHR, textStatus) {
@@ -31,7 +40,14 @@ $(function(){
       .always(function() {
         console.log('Request completed');
       });
+      return false;
   });
+
+})
+
+
+
+
 
 // var jqXHR = $.ajax({
 //         method: "GET",
