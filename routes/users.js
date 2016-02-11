@@ -1,22 +1,31 @@
 var express = require('express');
 var router = express.Router();
-// Require the User model
 var User = require('../models/user');
 var cors = require('cors');
 
-router.post('/', function(req, res, next) {
-    User.find({}, function(err, results) {
-      if (err) {
-        console.log(err);
-        throw err;
-      }
-      res.status(200).json(results);
-    });
-});
+// router.post('/', function(req, res, next) {
+//     User.find({}, function(err, results) {
+//       if (err) {
+//         console.log(err);
+//         throw err;
+//       }
+//       res.status(200).json(results);
+//     });
+// });
 
 router.get('/', function(req, res) {
-  res.render('users/index');
+  User.find({}, function(err, results) {
+    if (err) {
+      console.log(err);
+      throw err;
+    }
+    res.status(200).json(results);
+  });
 
+});
+
+router.get('/sign_in', function(req,res){
+  res.render('users/sign_in');
 });
 
 router.get('/sign_in', function(req, res){
@@ -26,6 +35,7 @@ router.get('/sign_in', function(req, res){
   var thisUser = User({
     email: email,
     password: password
+
   });
 
   User.findOne({ email: email }, function(err, user) {
@@ -41,13 +51,13 @@ router.get('/sign_in', function(req, res){
       thisUser.save(function(err) {
       if (err) console.log(err);
 
-      res.render('/index');
+      res.render('users/sign_in');
   });
 });
 
 router.get('/sign_up', function(req, res) {
 
-      res.render('users/sign_up.ejs');
+      res.render('users/sign_up');
 
 });
 
@@ -66,11 +76,11 @@ router.post('/sign_up', function(req, res){
       favoriteBeer: favoriteBeer
   });
 
-    // Save the user
+
     newUser.save(function(err) {
         if (err) console.log(err);
       });
-    res.render('users')
+    res.render('breweries/index');
 })
 
 
