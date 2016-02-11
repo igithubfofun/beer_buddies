@@ -9,6 +9,7 @@ $(function(){
 
 
 $('#submitBeer').on('submit', function() {
+  $('#matches').empty();
   var beer = $('#beer').val();
   console.log(beer);
 
@@ -24,14 +25,11 @@ $('#submitBeer').on('submit', function() {
 
 
         var filteredResult = _.where(users, {favoriteBeer: beer});
-        // console.log(filteredResult);
         var similarNames = _.pluck(filteredResult, 'name');
+        var similarZip = _.pluck(filteredResult, 'zip');
         for (var i = 0; i < similarNames.length; i++){
-          console.log(similarNames[i]);
-          $('#matches').append('<li>'+similarNames[i]+'</li>');
+          $('#matches').append('<li>'+similarNames[i]+'&nbsp;&nbsp;'+similarZip[i]+'</li>');
         }
-
-
 
       })
       .fail(function(jqXHR, textStatus) {
@@ -45,29 +43,30 @@ $('#submitBeer').on('submit', function() {
 
 })
 
+      var jqxhr = $.ajax({
+          url: '/api/beer/random?key=21284e4a1b4e205accad9dfc8afff0b8',
+          method: "GET",
+          data: {},
+          dataType: "json"
+      })
+        .done(function(data) {
+          // console.log(data.data.name);
+          $('#beerName').append(data.data.name);
+          if (data.data.description === ""){
+            console.log('hi')
+          }
+          else {
+            $('#beerDesc').append(data.data.description);
+          }
+          $('#beerPic').append('<img src = "'+data.data.labels.medium+'">');
 
-
-
-
-// var jqXHR = $.ajax({
-//         method: "GET",
-//         url: bURL +'beer/random',
-//         data: {
-//         key: bKey
-//         },
-//         contentType: "application/json",
-//         jsonpCallback: 'jsonCallback',
-//         dataType: "json"
-//        })
-//         .done(function() {
-//           console.log(jqXHR.data.id);
-//         })
-//         .fail(function(jqXHR, textStatus) {
-//           console.log("Request failed: " + textStatus);
-//         })
-//         .always(function() {
-//           console.log("Request completed");
-//       });
+        })
+        .fail(function(jqXHR, textStatus) {
+          console.log("Request failed: " + textStatus);
+        })
+        .always(function() {
+          console.log("Request completed");
+      });
 
 // });
 // var jqXHR = $.ajax({

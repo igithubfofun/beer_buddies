@@ -11,7 +11,7 @@ var google = {
 };
 
 router.get('/', function(req,res,next){
-  res.render('index', { title: 'Brewskiry', gURL: secret.gapi.gURL, gKey: secret.gapi.gKey, bURL: secret.bapi.bURL, bKey: secret.bapi.bKey, sURL: secret.spotapi.sURL, sKey: secret.spotapi.sKey });
+  res.render('index', { title: 'Beer Buddies', gURL: secret.gapi.gURL, gKey: secret.gapi.gKey, bURL: secret.bapi.bURL, bKey: secret.bapi.bKey, sURL: secret.spotapi.sURL, sKey: secret.spotapi.sKey });
 
 })
 

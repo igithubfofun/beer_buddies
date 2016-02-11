@@ -8,7 +8,7 @@ var cors = require('cors')
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var breweries = require('./routes/breweries');
-
+var proxyMiddleware = require('http-proxy-middleware');
 var app = express();
 
 // view engine setup
@@ -37,6 +37,25 @@ mongoose.connect(process.env.DB_CONN_BREWSKIRY);
 app.use('/', routes);
 app.use('/users', users);
 app.use('/breweries', breweries);
+
+var context = '/api'
+var options = {
+  target: 'http://api.brewerydb.com/v2',
+  changeOrigin: true,
+  logLevel: 'debug',
+  onError: function onError(err, req, res) {
+    res.writeHead(500, {
+        'Content-Type': 'text/plain'
+    });
+    res.end('Something went wrong. And we are reporting a custom error message.');
+  },
+  pathRewrite: {
+    "^/api" : "/",
+  }
+};
+
+var proxy = proxyMiddleware(context, options);
+app.use(proxy);
 
 
 // catch 404 and forward to error handler
