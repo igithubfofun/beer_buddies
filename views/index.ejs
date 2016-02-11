@@ -1,25 +1,25 @@
 <% include ./partials/header %>
 
 
-
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <div>
-    <form id="submitBeer">
-        <input type="text" name="beer" id="beer" placeholder="Enter Beer">
-        <input type="submit" value="Find Match">
-    </form>
-    </div>
-    <div>
-      <ul id="matches">
-        <li></li>
-      </ul>
-      <br>
-      <ul>
-        <li id="beerName"></li>
-        <li id="beerDesc"></li>
-        <li id="beerPic"></li>
-      </ul>
+    <div class="content">
+      <form id="submitBeer">
+          <input class="form-control" type="text" name="beer" id="beer" placeholder="Enter Beer">
+          <br>
+          <input type="submit" value="Find Match">
+      </form>
+        <ul id="matches">
+          <li></li>
+        </ul>
+        <br>
+          <br>
+          <input type="submit" id="randomize" value="Randomize">
+          <br>
+          <br>
+        <ul id="randomBeer">
+          <li id="beerName"></li>
+          <li id="beerDesc"></li>
+          <li id="beerPic"></li>
+        </ul>
     </div>
     <div class="hidden">
       <p id="gURL"><%= gURL %></p>
@@ -29,12 +29,10 @@
       <p id="sURL"><%= sURL %></p>
       <p id="sKey"><%= sKey %></p>
     </div>
-<!-- <div id="map"></div> -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
+
+
+
 <script>
-  // $.get("http://localhost:3000", function(response){
-  //   console.log("success!");
-  //   document.write(JSON.stringify(response));
-  // })
+
 </script>
 <% include ./partials/footer %>

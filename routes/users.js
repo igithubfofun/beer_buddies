@@ -83,6 +83,17 @@ router.post('/sign_up', function(req, res){
     res.render('breweries/index');
 })
 
+router.get('/all', function(req, res, next) {
+  User.find({}, function(err, results) {
+    if (err) {
+      console.log(err);
+      throw err;
+    }
+    // res.status(200).json(results);
+  });
+  res.render('users/all');
+
+});
 
 router.get('/:id/edit', function(req, res) {
   // EDIT

@@ -43,13 +43,18 @@ $('#submitBeer').on('submit', function() {
 
 })
 
-      var jqxhr = $.ajax({
-          url: '/api/beer/random?key=21284e4a1b4e205accad9dfc8afff0b8',
+      function randomize(){
+      $('#beerName').empty();
+      $('#beerDesc').empty();
+      $('#beerPic').empty();
+        var jqxhr = $.ajax({
+          url: '/api/beer/random?key=c2edb5cd55db30ff7a0f795ac6bff1ea9',
           method: "GET",
           data: {},
           dataType: "json"
       })
         .done(function(data) {
+
           // console.log(data.data.name);
           $('#beerName').append(data.data.name);
           if (data.data.description === ""){
@@ -67,7 +72,39 @@ $('#submitBeer').on('submit', function() {
         .always(function() {
           console.log("Request completed");
       });
+        return false;
+    }
 
+
+    $('#randomize').on('click', function(){
+      randomize();
+    })
+
+        var jqxhr = $.ajax({
+              url: '/users/',
+              method: "GET",
+              data: {},
+              dataType: "json"
+          })
+          .done(function(users) {
+
+            var filteredResult = _.where(users, {});
+            var similarNames = _.pluck(filteredResult, 'name');
+            var similarZip = _.pluck(filteredResult, 'zip');
+            var favoriteBeer = _.pluck(filteredResult, 'favoriteBeer');
+            for (var i = 0; i < similarNames.length; i++){
+              $('#allUsers').append('<li>'+similarNames[i]+'&nbsp;&nbsp;'+similarZip[i]+'&nbsp;&nbsp;'+favoriteBeer[i]+'</li>');
+            }
+            // $('#allUsers').append(users);
+          })
+          .fail(function(jqXHR, textStatus) {
+            console.log("Request failed: " + textStatus);
+          })
+          .always(function() {
+            console.log("Request completed");
+        });
+
+  randomize();
 // });
 // var jqXHR = $.ajax({
 //         url: sURL,
@@ -172,7 +209,7 @@ $('#submitBeer').on('submit', function() {
 //     method: "GET",
 //     data: {
 //       key: gKey,
-//       street_address: '16801 Colegrove Drive'
+//       street_address: ''
 //     },
 //     dataType: "json"
 // })

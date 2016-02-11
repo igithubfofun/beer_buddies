@@ -57,32 +57,6 @@ router.post('/new', function(req, res) {
       res.render('breweries/index')
   })
 
-router.get('/s', function(req,res){
-  var options = {
-      host: 'api.brewerydb.com',
-      path: 'v2/beer/random?key=21284e4a1b4e205accad9dfc8afff0b8'
-  };
-
-  http.get(options, function (http_res) {
-      // initialize the container for our data
-      var data = "";
-
-      // this event fires many times, each time collecting another piece of the response
-      http_res.on("data", function (chunk) {
-          // append this chunk to our growing `data` var
-          console.log("Hi");
-          data += chunk;
-
-      });
-
-      // this event fires *one* time, after all the `data` events/chunks have been gathered
-      http_res.on("end", function () {
-          // you can use res.send instead of console.log to output via express
-          console.log(data);
-      });
-
-  });
-});
 
 
 

@@ -15,15 +15,6 @@ router.get('/', function(req,res,next){
 
 })
 
-router.get('/i', function(req, res, next) {
-  User.find({}, function(err, results) {
-    if (err) {
-      console.log(err);
-      throw err;
-    }
-    res.status(200).json(results);
-  });
 
-});
 
 module.exports = router;
