@@ -34,7 +34,7 @@ $(function(){
     $('#beerPic').empty();
                                 //second key if max queries met - c2edb5cd55db30ff7a0f795ac6bff1ea9
     var jqxhr = $.ajax({
-      url: '/api/beer/random?key=21284e4a1b4e205accad9dfc8afff0b89',
+      url: '/api/beer/random?key=21284e4a1b4e205accad9dfc8afff0b8',
       method: "GET",
       data: {},
       dataType: "json"
