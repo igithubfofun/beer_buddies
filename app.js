@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 var cors = require('cors')
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var breweries = require('./routes/breweries');
 var proxyMiddleware = require('http-proxy-middleware');
 var session = require('express-session');
 var app = express();
@@ -38,7 +37,7 @@ mongoose.connect(process.env.DB_CONN_BREWSKIRY);
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/breweries', breweries);
+
 
 var context = '/api'
 var options = {

@@ -3,16 +3,6 @@ var router = express.Router();
 var User = require('../models/user');
 var cors = require('cors');
 
-// router.post('/', function(req, res, next) {
-//     User.find({}, function(err, results) {
-//       if (err) {
-//         console.log(err);
-//         throw err;
-//       }
-//       res.status(200).json(results);
-//     });
-// });
-
 router.get('/', function(req, res) {
   User.find({}, function(err, results) {
     if (err) {
@@ -21,7 +11,6 @@ router.get('/', function(req, res) {
     }
     res.status(200).json(results);
   });
-
 });
 
 router.get('/sign_in', function(req,res){
@@ -45,13 +34,10 @@ router.post('/sign_in', function(req, res){
     });
   });
   res.redirect('/');
-
 });
 
 router.get('/sign_up', function(req, res) {
-
-      res.render('users/sign_up');
-
+  res.render('users/sign_up');
 });
 
 router.post('/sign_up', function(req, res){
@@ -68,12 +54,10 @@ router.post('/sign_up', function(req, res){
       zip: zip,
       favoriteBeer: favoriteBeer
   });
-
-
     newUser.save(function(err) {
         if (err) console.log(err);
-      });
-    res.redirect('/');
+    });
+  res.redirect('/');
 })
 
 router.get('/all', function(req, res, next) {
@@ -82,10 +66,8 @@ router.get('/all', function(req, res, next) {
       console.log(err);
       throw err;
     }
-    // res.status(200).json(results);
   });
   res.render('users/all');
-
 });
 
 router.get('/:id/edit', function(req, res) {

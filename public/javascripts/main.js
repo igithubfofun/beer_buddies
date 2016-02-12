@@ -1,111 +1,103 @@
 $(function(){
-  // var gURL = $('#gURL').text();
-  // var gKey = $('#gKey').text();
-  // var bURL = $('#bURL').text();
-  // var bKey = $('#bKey').text();
-  // var sURL = $('#sURL').text();
-  // var sKey = $('#sKey').text();
   var apiRoot = '/users/';
-
-
-$('#submitBeer').on('submit', function() {
+  $('#submitBeer').on('submit', function() {
   $('#matches').empty();
   var beer = $('#beer').val();
 
+  var jqxhr = $.ajax({
+    url: apiRoot,
+    method: "GET",
+    data: {},
+    dataType: "json"
+  })
+    .done(function(users) {
+      var filteredResult = _.where(users, {favoriteBeer: beer});
+      var similarNames = _.pluck(filteredResult, 'name');
+      var similarZip = _.pluck(filteredResult, 'zip');
+      for (var i = 0; i < similarNames.length; i++){
+        $('#matches').append('<li><span>'+similarNames[i]+'</span>&nbsp;&nbsp;<span>'+similarZip[i]+'</span></li>');
+      }
 
-
-    var jqxhr = $.ajax({
-          url: apiRoot,
-          method: "GET",
-          data: {},
-          dataType: "json"
-      })
-      .done(function(users) {
-
-        var filteredResult = _.where(users, {favoriteBeer: beer});
-        var similarNames = _.pluck(filteredResult, 'name');
-        var similarZip = _.pluck(filteredResult, 'zip');
-        for (var i = 0; i < similarNames.length; i++){
-          $('#matches').append('<li><span>'+similarNames[i]+'</span>&nbsp;&nbsp;<span>'+similarZip[i]+'</span></li>');
-        }
-
-      })
-      .fail(function(jqXHR, textStatus) {
-        console.log("Request failed: " + textStatus);
-      })
-      .always(function() {
-        console.log('Request completed');
-      });
+    })
+    .fail(function(jqXHR, textStatus) {
+      console.log("Request failed: " + textStatus);
+    })
+    .always(function() {
+      console.log('Request completed');
+    });
       return false;
   });
 
-})
+  function randomize(){
+    $('#beerName').empty();
+    $('#beerDesc').empty();
+    $('#beerPic').empty();
 
-      function randomize(){
-      $('#beerName').empty();
-      $('#beerDesc').empty();
-      $('#beerPic').empty();
-        var jqxhr = $.ajax({
-          url: '/api/beer/random?key=c2edb5cd55db30ff7a0f795ac6bff1ea9',
-          method: "GET",
-          data: {},
-          dataType: "json"
-      })
-        .done(function(data) {
-
-          // console.log(data.data.name);
-          $('#beerName').append(data.data.name);
-          if (data.data.hasOwnProperty("labels")) {
-            $('#beerPic').append('<img src = "'+data.data.labels.medium+'">');
-          }
-          else {
-            console.log('HI');
-          }
-          $('#beerDesc').append(data.data.description);
-
-
-        })
-        .fail(function(jqXHR, textStatus) {
-          console.log("Request failed: " + textStatus);
-        })
-        .always(function() {
-          console.log("Request completed");
-      });
-        return false;
-    }
-
-
-    $('#randomize').on('click', function(){
-      randomize();
+    var jqxhr = $.ajax({
+      url: '/api/beer/random?key=c2edb5cd55db30ff7a0f795ac6bff1ea',
+      method: "GET",
+      data: {},
+      dataType: "json"
     })
+    .done(function(data) {
+      if (data.data.hasOwnProperty("name")){
+        $('#beerName').append(data.data.name);
+      }
+      else {
+        $('#beerName').append("Beer Not Found :(");
+      }
+      if (data.data.hasOwnProperty("labels")) {
+        $('#beerPic').append('<img class="img-rounded" src = "'+data.data.labels.medium+'">');
+      }
+      else {
+        $('#beerPic').append('<img class="img-rounded" src="http://rlv.zcache.com/404_error_beer_not_found_rectangular_sticker-rb0011e57ec46486f820c4ecd76df4165_v9wxo_8byvr_512.jpg"/>');
+      }
+      if (data.data.hasOwnProperty("description")){
+        $('#beerDesc').append(data.data.description);
+      }
+      else {
+        $('#beerDesc').append("No Description :(");
+      }
 
-        var jqxhr = $.ajax({
-              url: '/users/',
-              method: "GET",
-              data: {},
-              dataType: "json"
-          })
-          .done(function(users) {
+    })
+    .fail(function(jqXHR, textStatus) {
+      console.log("Request failed: " + textStatus);
+    })
+    .always(function() {
+      console.log("Request completed");
+    });
+    return false;
+  }
 
-            var filteredResult = _.where(users, {});
-            var similarNames = _.pluck(filteredResult, 'name');
-            var similarZip = _.pluck(filteredResult, 'zip');
-            var favoriteBeer = _.pluck(filteredResult, 'favoriteBeer');
-            for (var i = 0; i < similarNames.length; i++){
-              $('#allUsers').append('<li><span>'+similarNames[i]+
-                '</span>&nbsp;&nbsp;<span>'+similarZip[i]+'</span>&nbsp;&nbsp;</span>'+
-                favoriteBeer[i]+'</span></li>');
-            }
-            // $('#allUsers').append(users);
-          })
-          .fail(function(jqXHR, textStatus) {
-            console.log("Request failed: " + textStatus);
-          })
-          .always(function() {
-            console.log("Request completed");
-        });
+  $('#randomize').on('click', function(){
+    randomize();
+  })
 
-  randomize();
+  var jqxhr = $.ajax({
+    url: '/users/',
+    method: "GET",
+    data: {},
+    dataType: "json"
+  })
+    .done(function(users) {
+      var filteredResult = _.where(users, {});
+      var similarNames = _.pluck(filteredResult, 'name');
+      var similarZip = _.pluck(filteredResult, 'zip');
+      var favoriteBeer = _.pluck(filteredResult, 'favoriteBeer');
+      for (var i = 0; i < similarNames.length; i++){
+        $('#allUsers').append('<li><span>'+similarNames[i]+
+        '</span>&nbsp;&nbsp;<span>'+similarZip[i]+'</span>&nbsp;&nbsp;</span>'+
+        favoriteBeer[i]+'</span></li>');
+      }
+    })
+    .fail(function(jqXHR, textStatus) {
+      console.log("Request failed: " + textStatus);
+    })
+    .always(function() {
+      console.log("Request completed");
+    });
+
+randomize();
 
   $(document).ready(function() {
     $('.pour') //Pour Me Another Drink, Bartender!
@@ -127,7 +119,9 @@ $('#submitBeer').on('submit', function() {
       .animate({
         bottom: '200px'
         }, 2500);
-    });
+  });
+});
+
 // var jqXHR = $.ajax({
 //         url: sURL,
 //         function: "beer",

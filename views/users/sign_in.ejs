@@ -1,26 +1,20 @@
 <% include ../partials/header %>
 <link rel="stylesheet" href="../stylesheets/style.css">
-
 <center>
-<h1>Fake Sign In!</h1>
-<form name="sign_in_form" id="sign_in_form" method="post" action="/users/sign_in">
-    <div>
-        <input class="form-control" type="text" name="email" id="email" placeholder="Email address">
-    </div>
-    <br>
-    <div>
-        <input class="form-control" type="text" name="password" id="password" placeholder="Password">
-    </div>
-    <br>
-    <input class="btn" type="submit" value="Log In">
-    <input class="btn logout" type ="submit" value="Log Out">
-</form>
-
-
-
+    <h1>Fake Sign In!</h1>
+    <form name="sign_in_form" id="sign_in_form" method="post" action="/users/sign_in">
+        <div>
+            <input class="form-control" type="text" name="email" id="email" placeholder="Email address">
+        </div>
+        <br>
+        <div>
+            <input class="form-control" type="text" name="password" id="password" placeholder="Password">
+        </div>
+        <br>
+        <input class="btn" type="submit" value="Log In">
+        <input class="btn logout" type ="submit" value="Log Out">
+    </form>
 </center>
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="../javascripts/main.js"></script>
 <% include ../partials/footer %>

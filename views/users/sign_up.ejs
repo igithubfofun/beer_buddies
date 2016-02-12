@@ -1,36 +1,32 @@
 <% include ../partials/header %>
 <link rel="stylesheet" href="../stylesheets/style.css">
-
 <center>
-<h1>Sign Up You Alcoholic</h1>
-<br>
-<form name="new_user_form" id="new_user_form" method="post" action="/users/sign_up">
-    <div>
-        <input class="form-control" type="text" name="name" id="name" placeholder="Full name">
-    </div>
+    <h1>Sign Up You Alcoholic</h1>
     <br>
-    <div>
-        <input class="form-control" type="text" name="email" id="email" placeholder="Email address">
-    </div>
-    <br>
-    <div>
-        <input class="form-control" type="text" name="password" id="password" placeholder="Password">
-    </div>
-    <br>
-    <div>
-        <input class="form-control" type="text" name="zip" id="zip" placeholder="Zip Code">
-    </div>
-    <br>
-    <div>
-        <input class="form-control" type="text" name="favoriteBeer" id="favoriteBeer" placeholder="Favorite beer">
-    </div>
-    <br>
-    <input class="btn" type="submit" value="Save">
-</form>
+    <form name="new_user_form" id="new_user_form" method="post" action="/users/sign_up">
+        <div>
+            <input class="form-control" type="text" name="name" id="name" placeholder="Full name">
+        </div>
+        <br>
+        <div>
+            <input class="form-control" type="text" name="email" id="email" placeholder="Email address">
+        </div>
+        <br>
+        <div>
+            <input class="form-control" type="text" name="password" id="password" placeholder="Password">
+        </div>
+        <br>
+        <div>
+            <input class="form-control" type="text" name="zip" id="zip" placeholder="Zip Code">
+        </div>
+        <br>
+        <div>
+            <input class="form-control" type="text" name="favoriteBeer" id="favoriteBeer" placeholder="Favorite beer">
+        </div>
+        <br>
+        <input class="btn" type="submit" value="Save">
+    </form>
 </center>
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="../javascripts/main.js"></script>
-
 <% include ../partials/footer %>
