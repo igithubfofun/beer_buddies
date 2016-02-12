@@ -20,5 +20,5 @@ GitHub: https://github.com/igithubfofun/beer_buddies
 
 PivotTracker: https://www.pivotaltracker.com/n/projects/1532113
 
-Technologies used: Express, Node, CSS, HTML, JQuery, Javascript, Bootstrap, Underscore.js, Proxy, Mongoose, Mongodb, 
-
+Technologies Used: Express, Node, CSS, HTML, JQuery, Javascript, Bootstrap, Underscore.js, Proxy, Mongoose, Mongodb
+API's Used: http://www.brewerydb.com/, and personally created MongoLab database
