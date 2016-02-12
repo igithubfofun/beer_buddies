@@ -19,3 +19,4 @@ Site: https://shrouded-hamlet-71881.herokuapp.com/
 GitHub: https://github.com/igithubfofun/beer_buddies
 
 Technologies used: Express, Node, CSS, HTML, JQuery, Javascript, Bootstrap, Underscore.js, Proxy, Mongoose, Mongodb, 
+
