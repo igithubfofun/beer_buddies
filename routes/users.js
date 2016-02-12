@@ -28,31 +28,26 @@ router.get('/sign_in', function(req,res){
   res.render('users/sign_in');
 });
 
-router.get('/sign_in', function(req, res){
+router.post('/sign_in', function(req, res){
   var email = req.body.email;
   var password = req.body.password;
 
-  var thisUser = User({
-    email: email,
-    password: password
-
-  });
-
   User.findOne({ email: email }, function(err, user) {
-      if (err) throw err;
+    if (err) throw err;
 
-      // test a matching password
-      User.comparePassword(password, function(err, isMatch) {
-          if (err) throw err;
+    user.comparePassword(password, function(err, isMatch) {
+      if (err) console.log('error');
+        if (isMatch){
           console.log(password, isMatch);
-      });
+          req.session.userId = user._id;
+        }
 
-  });
-      thisUser.save(function(err) {
-      if (err) console.log(err);
 
-      res.render('users/sign_in');
+
+    });
   });
+  res.redirect('/');
+
 });
 
 router.get('/sign_up', function(req, res) {
@@ -80,7 +75,7 @@ router.post('/sign_up', function(req, res){
     newUser.save(function(err) {
         if (err) console.log(err);
       });
-    res.render('breweries/index');
+    res.redirect('/');
 })
 
 router.get('/all', function(req, res, next) {

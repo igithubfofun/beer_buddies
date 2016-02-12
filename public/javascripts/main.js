@@ -11,7 +11,7 @@ $(function(){
 $('#submitBeer').on('submit', function() {
   $('#matches').empty();
   var beer = $('#beer').val();
-  console.log(beer);
+
 
 
     var jqxhr = $.ajax({
@@ -22,13 +22,11 @@ $('#submitBeer').on('submit', function() {
       })
       .done(function(users) {
 
-
-
         var filteredResult = _.where(users, {favoriteBeer: beer});
         var similarNames = _.pluck(filteredResult, 'name');
         var similarZip = _.pluck(filteredResult, 'zip');
         for (var i = 0; i < similarNames.length; i++){
-          $('#matches').append('<li>'+similarNames[i]+'&nbsp;&nbsp;'+similarZip[i]+'</li>');
+          $('#matches').append('<li><span>'+similarNames[i]+'</span>&nbsp;&nbsp;<span>'+similarZip[i]+'</span></li>');
         }
 
       })
@@ -57,13 +55,14 @@ $('#submitBeer').on('submit', function() {
 
           // console.log(data.data.name);
           $('#beerName').append(data.data.name);
-          if (data.data.description === ""){
-            console.log('hi')
+          if (data.data.hasOwnProperty("labels")) {
+            $('#beerPic').append('<img src = "'+data.data.labels.medium+'">');
           }
           else {
-            $('#beerDesc').append(data.data.description);
+            console.log('HI');
           }
-          $('#beerPic').append('<img src = "'+data.data.labels.medium+'">');
+          $('#beerDesc').append(data.data.description);
+
 
         })
         .fail(function(jqXHR, textStatus) {
@@ -93,7 +92,9 @@ $('#submitBeer').on('submit', function() {
             var similarZip = _.pluck(filteredResult, 'zip');
             var favoriteBeer = _.pluck(filteredResult, 'favoriteBeer');
             for (var i = 0; i < similarNames.length; i++){
-              $('#allUsers').append('<li>'+similarNames[i]+'&nbsp;&nbsp;'+similarZip[i]+'&nbsp;&nbsp;'+favoriteBeer[i]+'</li>');
+              $('#allUsers').append('<li><span>'+similarNames[i]+
+                '</span>&nbsp;&nbsp;<span>'+similarZip[i]+'</span>&nbsp;&nbsp;</span>'+
+                favoriteBeer[i]+'</span></li>');
             }
             // $('#allUsers').append(users);
           })
@@ -105,7 +106,28 @@ $('#submitBeer').on('submit', function() {
         });
 
   randomize();
-// });
+
+  $(document).ready(function() {
+    $('.pour') //Pour Me Another Drink, Bartender!
+      .delay(2000)
+      .animate({
+        height: '500px'
+        }, 1500)
+      .delay(1600)
+      .slideUp(500);
+
+    $('#liquid') // I Said Fill 'Er Up!
+      .delay(3400)
+      .animate({
+        height: '170px'
+      }, 2500);
+
+    $('.beer-foam') // Keep that Foam Rollin' Toward the Top! Yahooo!
+      .delay(3400)
+      .animate({
+        bottom: '200px'
+        }, 2500);
+    });
 // var jqXHR = $.ajax({
 //         url: sURL,
 //         function: "beer",
