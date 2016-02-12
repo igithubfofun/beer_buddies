@@ -1,10 +1,10 @@
 $(function(){
-  var gURL = $('#gURL').text();
-  var gKey = $('#gKey').text();
-  var bURL = $('#bURL').text();
-  var bKey = $('#bKey').text();
-  var sURL = $('#sURL').text();
-  var sKey = $('#sKey').text();
+  // var gURL = $('#gURL').text();
+  // var gKey = $('#gKey').text();
+  // var bURL = $('#bURL').text();
+  // var bKey = $('#bKey').text();
+  // var sURL = $('#sURL').text();
+  // var sKey = $('#sKey').text();
   var apiRoot = '/users/';
 
 
