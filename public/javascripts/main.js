@@ -34,7 +34,7 @@ $(function(){
     $('#beerPic').empty();
 
     var jqxhr = $.ajax({
-      url: '/api/beer/random?key=c2edb5cd55db30ff7a0f795ac6bff1ea9',
+      url: '/api/beer/random?key=c2edb5cd55db30ff7a0f795ac6bff1ea',
       method: "GET",
       data: {},
       dataType: "json"
