@@ -1,40 +1,40 @@
 $(function(){
   var apiRoot = '/users/';
+
   $('#submitBeer').on('submit', function() {
-  $('#matches').empty();
-  var beer = $('#beer').val();
+    $('#matches').empty();
+    var beer = $('#beer').val();
 
-  var jqxhr = $.ajax({
-    url: apiRoot,
-    method: "GET",
-    data: {},
-    dataType: "json"
-  })
-    .done(function(users) {
-      var filteredResult = _.where(users, {favoriteBeer: beer});
-      var similarNames = _.pluck(filteredResult, 'name');
-      var similarZip = _.pluck(filteredResult, 'zip');
-      for (var i = 0; i < similarNames.length; i++){
-        $('#matches').append('<li><span>'+similarNames[i]+'</span>&nbsp;&nbsp;<span>'+similarZip[i]+'</span></li>');
-      }
-
+    var jqxhr = $.ajax({
+      url: apiRoot,
+      method: "GET",
+      data: {},
+      dataType: "json"
     })
-    .fail(function(jqXHR, textStatus) {
-      console.log("Request failed: " + textStatus);
-    })
-    .always(function() {
-      console.log('Request completed');
+      .done(function(users) {
+        var filteredResult = _.where(users, {favoriteBeer: beer});
+        var similarNames = _.pluck(filteredResult, 'name');
+        var similarZip = _.pluck(filteredResult, 'zip');
+        for (var i = 0; i < similarNames.length; i++){
+          $('#matches').append('<li><span>'+similarNames[i]+'</span>&nbsp;&nbsp;<span>'+similarZip[i]+'</span></li>');
+        }
+      })
+      .fail(function(jqXHR, textStatus) {
+        console.log("Request failed: " + textStatus);
+      })
+      .always(function() {
+        console.log('Request completed');
+      });
+        return false;
     });
-      return false;
-  });
 
   function randomize(){
     $('#beerName').empty();
     $('#beerDesc').empty();
     $('#beerPic').empty();
-//c2edb5cd55db30ff7a0f795ac6bff1ea9
+                                //second key if max queries met - c2edb5cd55db30ff7a0f795ac6bff1ea9
     var jqxhr = $.ajax({
-      url: '/api/beer/random?key=21284e4a1b4e205accad9dfc8afff0b8',
+      url: '/api/beer/random?key=21284e4a1b4e205accad9dfc8afff0b89',
       method: "GET",
       data: {},
       dataType: "json"
@@ -58,7 +58,6 @@ $(function(){
       else {
         $('#beerDesc').append("No Description :(");
       }
-
     })
     .fail(function(jqXHR, textStatus) {
       console.log("Request failed: " + textStatus);
@@ -79,25 +78,23 @@ $(function(){
     data: {},
     dataType: "json"
   })
-    .done(function(users) {
-      var filteredResult = _.where(users, {});
-      var similarNames = _.pluck(filteredResult, 'name');
-      var similarZip = _.pluck(filteredResult, 'zip');
-      var favoriteBeer = _.pluck(filteredResult, 'favoriteBeer');
-      for (var i = 0; i < similarNames.length; i++){
-        $('#allUsers').append('<li><span>'+similarNames[i]+
-        '</span>&nbsp;&nbsp;<span>'+similarZip[i]+'</span>&nbsp;&nbsp;</span>'+
-        favoriteBeer[i]+'</span></li>');
-      }
-    })
-    .fail(function(jqXHR, textStatus) {
-      console.log("Request failed: " + textStatus);
-    })
-    .always(function() {
-      console.log("Request completed");
-    });
-
-randomize();
+  .done(function(users) {
+    var filteredResult = _.where(users, {});
+    var similarNames = _.pluck(filteredResult, 'name');
+    var similarZip = _.pluck(filteredResult, 'zip');
+    var favoriteBeer = _.pluck(filteredResult, 'favoriteBeer');
+    for (var i = 0; i < similarNames.length; i++){
+      $('#allUsers').append('<li><span>'+similarNames[i]+
+      '</span>&nbsp;&nbsp;<span>'+similarZip[i]+'</span>&nbsp;&nbsp;</span>'+
+      favoriteBeer[i]+'</span></li>');
+    }
+  })
+  .fail(function(jqXHR, textStatus) {
+    console.log("Request failed: " + textStatus);
+  })
+  .always(function() {
+    console.log("Request completed");
+  });
 
   $(document).ready(function() {
     $('.pour') //Pour Me Another Drink, Bartender!
@@ -121,6 +118,8 @@ randomize();
         }, 2500);
   });
 });
+
+randomize();
 
 // var jqXHR = $.ajax({
 //         url: sURL,
