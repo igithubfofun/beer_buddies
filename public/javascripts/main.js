@@ -111,7 +111,7 @@ $('#submitBeer').on('submit', function() {
     $('.pour') //Pour Me Another Drink, Bartender!
       .delay(2000)
       .animate({
-        height: '500px'
+        height: '550px'
         }, 1500)
       .delay(1600)
       .slideUp(500);
@@ -119,7 +119,7 @@ $('#submitBeer').on('submit', function() {
     $('#liquid') // I Said Fill 'Er Up!
       .delay(3400)
       .animate({
-        height: '170px'
+        height: '100px'
       }, 2500);
 
     $('.beer-foam') // Keep that Foam Rollin' Toward the Top! Yahooo!
