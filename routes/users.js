@@ -42,8 +42,6 @@ router.post('/sign_in', function(req, res){
           req.session.userId = user._id;
         }
 
-
-
     });
   });
   res.redirect('/');
