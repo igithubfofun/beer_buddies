@@ -67,7 +67,7 @@ $(function(){
     });
     return false;
   }
-
+randomize();
   $('#randomize').on('click', function(){
     randomize();
   })
@@ -119,7 +119,7 @@ $(function(){
   });
 });
 
-randomize();
+
 
 // var jqXHR = $.ajax({
 //         url: sURL,
