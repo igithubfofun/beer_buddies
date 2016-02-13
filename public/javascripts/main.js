@@ -1,5 +1,14 @@
 $(function(){
+
   var apiRoot = '/users/';
+
+  function playAudio(){
+    $(".nothing").stop("true").delay('3000').queue(function() {
+        $(this).html('<audio autoplay><source src="../images/beersound.mp3" type="audio/mp3"></audio>');
+      });
+  }
+
+  playAudio();
 
   $('#submitBeer').on('submit', function() {
     $('#matches').empty();
@@ -17,6 +26,7 @@ $(function(){
         var similarZip = _.pluck(filteredResult, 'zip');
         for (var i = 0; i < similarNames.length; i++){
           $('#matches').append('<li><span>'+similarNames[i]+'</span>&nbsp;&nbsp;<span>'+similarZip[i]+'</span></li>');
+
         }
       })
       .fail(function(jqXHR, textStatus) {
@@ -32,9 +42,9 @@ $(function(){
     $('#beerName').empty();
     $('#beerDesc').empty();
     $('#beerPic').empty();
-                                //second key if max queries met - c2edb5cd55db30ff7a0f795ac6bff1ea9
+                                //second key if max queries met - 21284e4a1b4e205accad9dfc8afff0b89
     var jqxhr = $.ajax({
-      url: '/api/beer/random?key=21284e4a1b4e205accad9dfc8afff0b8',
+      url: '/api/beer/random?key=c2edb5cd55db30ff7a0f795ac6bff1ea',
       method: "GET",
       data: {},
       dataType: "json"
