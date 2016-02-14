@@ -43,7 +43,7 @@ $(function(){
     $('#beerDesc').empty();
     $('#beerPic').empty();
                                 //second key if max queries met - 21284e4a1b4e205accad9dfc8afff0b89
-    var jqxhr = $.ajax({
+    var jqXHR = $.ajax({
       url: '/api/beer/random?key=c2edb5cd55db30ff7a0f795ac6bff1ea',
       method: "GET",
       data: {},
@@ -82,7 +82,7 @@ randomize();
     randomize();
   })
 
-  var jqxhr = $.ajax({
+  var jqXHR = $.ajax({
     url: '/users/',
     method: "GET",
     data: {},
@@ -170,23 +170,23 @@ randomize();
 
 //   //showLoadingIndicator();
 
-//   var jqxhr = $.ajax({
-//         url: apiRoot,
-//         method: "GET",
-//         data: {},
-//         dataType: "json"
-//     })
-//     .done(function(breweries) {
-//       console.log('brewery data', brewerys);
-//       displaybrewerys(brewerys);
-//     })
-//     .fail(function(jqXHR, textStatus) {
-//       console.log("Request failed: " + textStatus);
-//     })
-//     .always(function() {
-//       console.log('Request completed');
+// var jqxhr = $.ajax({
+//       url: apiRoot,
+//       method: "GET",
+//       data: {},
+//       dataType: "json"
+//   })
+//   .done(function(breweries) {
+//     console.log('brewery data', brewerys);
+//     displaybrewerys(brewerys);
+//   })
+//   .fail(function(jqXHR, textStatus) {
+//     console.log("Request failed: " + textStatus);
+//   })
+//   .always(function() {
+//     console.log('Request completed');
 
-//     });
+//   });
 // };
 
 // var displayBreweries = function(breweries) {
